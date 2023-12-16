@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
@@ -5,12 +6,14 @@ public class CollisionDamage : MonoBehaviour
     public string collisionTag = "Player";
     public int collisionDamage = 0;
 
-    private void OnCollisionEnter2D(Collision2D coll)
+    private HashSet<GameObject> collectedDamage = new HashSet<GameObject>();
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (coll.gameObject.tag == collisionTag)
+        if (collision.gameObject.tag == collisionTag)
         {
-            Health health = coll.gameObject.GetComponent<Health>();
+            Health health = collision.gameObject.GetComponent<Health>();
             health.TakeHit(collisionDamage);
+            collectedDamage.Add(collision.gameObject);
         }
     }
 

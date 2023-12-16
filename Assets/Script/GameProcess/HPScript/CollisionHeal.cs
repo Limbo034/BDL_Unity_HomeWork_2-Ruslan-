@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionHeal : MonoBehaviour
@@ -5,19 +6,25 @@ public class CollisionHeal : MonoBehaviour
     public string collisionTag = "Player";
     public int collisionHeal = 0;
 
+    private HashSet<GameObject> collectedHeal = new HashSet<GameObject>();
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other != null && other.gameObject != null && other.gameObject.tag == collisionTag)
         {
-            Health health = other.gameObject.GetComponent<Health>();
-
-            if (health != null)
+            if (!collectedHeal.Contains(other.gameObject))
             {
-                health.SetHealth(collisionHeal);
+                Health health = other.gameObject.GetComponent<Health>();
 
-                if (health.health < health.maxHealth)
+                if (health != null)
                 {
-                    Destroy(gameObject);
+
+                    if (health.health < health.maxHealth)
+                    {
+                        health.SetHealth(collisionHeal);
+                        collectedHeal.Add(other.gameObject);
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
