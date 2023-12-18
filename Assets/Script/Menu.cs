@@ -1,33 +1,71 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-	private int _buildIndexSceneGame = 1;
+	[SerializeField]private GameObject mainMenu;
+	[SerializeField]private GameObject optionsMenu;
+    [SerializeField]private GameObject levelMenu;
 
-	[SerializeField]private GameObject _mainMenu;
-	[SerializeField]private GameObject _options;
+    private int levelComplete;
+	public Button level2;
+	public Button level3;
 
-	public void StartGame()
+    void Start()
+    {
+        levelComplete = PlayerPrefs.GetInt("levelComplete");
+        level2.interactable = false;
+		level3.interactable = false;
+
+		switch (levelComplete)
 		{
-			SceneManager.LoadScene(_buildIndexSceneGame);
+			case 1:
+				level2.interactable = true;
+				break;
+			case 2:
+				level2.interactable = true;
+				level3.interactable= true;
+				break;
 		}
+	}
 
-	public void ExitGame()
-		{
-			Application.Quit();
-		}
+	public void LoadTo(int level)
+	{
+		SceneManager.LoadScene(level);
 
+    }
+
+    public void Reset()
+    {
+        level2.interactable = false;
+        level3.interactable = false;
+		PlayerPrefs.DeleteAll();
+    }
+
+    public void ExitGame()
+	{
+		Application.Quit();
+	}
 	public void OpenOptions()
-		{
-			_options.SetActive(true);
-			_mainMenu.SetActive(false);
-		}
+	{
+        optionsMenu.SetActive(true);
+		mainMenu.SetActive(false);
+	}
 
 	public void CloseOptions()
-		{
-			_options.SetActive(false);
-			_mainMenu.SetActive(true);
-
-		}
+	{
+        optionsMenu.SetActive(false);
+		mainMenu.SetActive(true);
+	}
+	public void OpenLevel()
+	{
+        levelMenu.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+	public void CloseLevel()
+	{
+        levelMenu.SetActive(false);
+        mainMenu.SetActive(true);
+    }
 }

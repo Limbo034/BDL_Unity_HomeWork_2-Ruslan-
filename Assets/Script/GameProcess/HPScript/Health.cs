@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     private bool isDisappeared = false;
     private bool hasTriggered = false;
 
+    [SerializeField] private GameObject deadMenu;
+
     private void Update()
     {
         if (isDisappeared && !hasTriggered)
@@ -17,6 +19,7 @@ public class Health : MonoBehaviour
             {
                 playerMovement.Trigger();
                 hasTriggered = true;
+                Invoke("DeadMenu", 2f);
             }
         }
     }
@@ -39,5 +42,10 @@ public class Health : MonoBehaviour
         {
             health = maxHealth;
         }
+    }
+
+    void DeadMenu()
+    {
+        deadMenu.SetActive(true);
     }
 }

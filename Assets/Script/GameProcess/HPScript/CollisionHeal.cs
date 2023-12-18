@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CollisionHeal : MonoBehaviour
 {
-    public string collisionTag = "Player";
-    public int collisionHeal = 0;
+    [SerializeField] private string collisionTag = "Player";
+    [SerializeField] private int collisionHeal = 0;
 
     private HashSet<GameObject> collectedHeal = new HashSet<GameObject>();
 

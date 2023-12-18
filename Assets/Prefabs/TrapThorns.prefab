@@ -145,5 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac2164f6f3111124e81780a54cbaaf61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collisionTag: Player
-  _collisionDamage: 20
+  collisionTag: Player
+  collisionDamage: 20

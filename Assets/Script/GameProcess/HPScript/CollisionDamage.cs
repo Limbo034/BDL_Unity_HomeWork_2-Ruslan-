@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CollisionDamage : MonoBehaviour
 {
-    public string collisionTag = "Player";
-    public int collisionDamage = 0;
+    [SerializeField] private string collisionTag = "Player";
+    [SerializeField] private int collisionDamage = 0;
 
     private HashSet<GameObject> collectedDamage = new HashSet<GameObject>();
     private void OnCollisionEnter2D(Collision2D collision)
@@ -16,6 +16,5 @@ public class CollisionDamage : MonoBehaviour
             collectedDamage.Add(collision.gameObject);
         }
     }
-
 
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isRun = false;
 
+    //Header - заголовок, Range - ползунок
     [Header("Player Movement Settings")]
     [Range(0, 10f)][SerializeField] private float walkMoveSpeed = 1f;
     [Range(0, 10f)][SerializeField] private float runMoveSpeed = 1f;
@@ -58,6 +60,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             animator.SetBool("Jumping", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            SceneManager.LoadScene(0);
         }
     }
 
